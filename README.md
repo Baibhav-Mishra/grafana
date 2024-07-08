@@ -6,9 +6,9 @@
 
 3) Install Infinity Plugin [here](https://grafana.com/grafana/plugins/yesoreyeram-infinity-datasource/)
 4) Configure the plugin by adding the authentication
-5) import main.json, worker.json, docker-build-worker.json, global-search.json, model-search.json
+5) Import main.json, worker.json, docker-build-worker.json, global-search.json, model-search.json
 
-##Using the Dashboard
+## Using the Dashboard
 1) The dashboard is divided into four sections
 2) Us
 
