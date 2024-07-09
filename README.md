@@ -8,8 +8,11 @@
 4) Configure the plugin by adding the authentication
 5) Import main.json, worker.json, docker-build-worker.json, global-search.json, model-search.json
 
-## Using the Dashboard
-1) The dashboard is divided into four sections
-2) Us
+## Settubg up Infinity Plugin
+1) Head over to http://localhost:3000/connections/datasources/new
+2) Select basic Authentication and fill in the authdetails
+![image](https://github.com/Baibhav-Mishra/grafana/assets/33419322/e691c550-9239-43c3-a15e-0893d55fafca)
+3) Click on Save and Test 
+
 
 
