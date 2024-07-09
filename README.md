@@ -3,8 +3,9 @@
 ## Setting up Infinity Plugin
 1) Install Infinity Plugin [here](https://grafana.com/grafana/plugins/yesoreyeram-infinity-datasource/)
 2) Head over to ```http://<grafana-url>/connections/datasources/new```
-3) Select basic Authentication and fill in the Auth details
-4) Click on Save and Test
+3) Select Infinity 
+4) Select basic Authentication and fill in the Auth details
+5) Click on Save and Test
 ![image](https://github.com/Baibhav-Mishra/grafana/assets/33419322/c2f78d10-cd1e-4f87-8e68-4b8550dd07cd)
 
 
