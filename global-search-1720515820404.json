@@ -1,0 +1,321 @@
+{
+  "__inputs": [
+    {
+      "name": "DS_4",
+      "label": "4",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "yesoreyeram-infinity-datasource",
+      "pluginName": "Infinity"
+    }
+  ],
+  "__elements": {
+    "bdqix3gnahp8ga": {
+      "name": "Global Search",
+      "uid": "bdqix3gnahp8ga",
+      "kind": 1,
+      "model": {
+        "datasource": {
+          "type": "yesoreyeram-infinity-datasource",
+          "uid": "${DS_4}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "inspect": false
+            },
+            "mappings": [],
+            "noValue": "Add correct search parameter",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "enablePagination": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true,
+          "sortBy": [
+            {
+              "desc": false,
+              "displayName": "asd"
+            }
+          ]
+        },
+        "pluginVersion": "11.0.0",
+        "targets": [
+          {
+            "columns": [],
+            "computed_columns": [],
+            "datasource": {
+              "type": "yesoreyeram-infinity-datasource",
+              "uid": "edr7unrnuqghsd"
+            },
+            "filters": [],
+            "format": "table",
+            "global_query_id": "",
+            "groq": "*",
+            "pagination_max_pages": 2,
+            "pagination_mode": "none",
+            "pagination_param_list_field_name": "d",
+            "pagination_param_list_value": "d",
+            "pagination_param_offset_field_name": "from",
+            "pagination_param_offset_field_type": "query",
+            "pagination_param_offset_value": 0,
+            "pagination_param_size_field_name": "size",
+            "pagination_param_size_field_type": "query",
+            "pagination_param_size_value": 2,
+            "parser": "backend",
+            "refId": "A",
+            "root_selector": "hits.hits",
+            "source": "url",
+            "type": "json",
+            "uql": "parse-json",
+            "url": "https://search-inferless-dev-r4tfcimggy6ezwpaqi6a27aefu.us-east-1.es.amazonaws.com/inferlessdev-2024-06/_search",
+            "url_options": {
+              "body_content_type": "application/json",
+              "body_type": "raw",
+              "data": "{\n   \"query\": {\n    \n    \"bool\": {\n      \"must\": [\n        {\n            \"multi_match\": {\n            \"query\": \"${gsearch}\",\n            \"fields\": [\"stream\", \"source_type\", \"pod_id\", \"pod_name\", \"source_type\"]}\n        }\n      ],\n      \"filter\": [\n                {\n                    \"range\": {\n                        \"@timestamp\": {\n                            \"gte\": \"${__from:date}\",\n                            \"lte\": \"${__to:date}\"\n                        }\n                    }\n                }\n            ]\n      }},\n    \"size\": \"${line}\",\n    \"sort\": [\n        {\n            \"@timestamp\": {\n                \"order\": \"asc\"\n            }\n        }\n    ]\n}",
+              "headers": [],
+              "method": "POST"
+            }
+          }
+        ],
+        "title": "Global Search",
+        "transformations": [
+          {
+            "id": "extractFields",
+            "options": {
+              "keepTime": false,
+              "replace": true,
+              "source": "_source"
+            }
+          },
+          {
+            "id": "extractFields",
+            "options": {
+              "source": "kubernetes"
+            }
+          },
+          {
+            "id": "extractFields",
+            "options": {
+              "source": "labels"
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "@timestamp": true,
+                "_p": true,
+                "app": true,
+                "component": true,
+                "container_hash": true,
+                "container_image": true,
+                "container_name": true,
+                "docker_id": true,
+                "kubernetes": true,
+                "labels": true,
+                "namespace_name": true,
+                "pod-template-hash": true,
+                "request_id": true,
+                "service.istio.io/canonical-name": true,
+                "service.istio.io/canonical-revision": true,
+                "serving.knative.dev/configuration": true,
+                "serving.knative.dev/configurationGeneration": true,
+                "serving.knative.dev/configurationUID": true,
+                "serving.knative.dev/revision": true,
+                "serving.knative.dev/revisionUID": true,
+                "serving.knative.dev/service": true,
+                "serving.knative.dev/serviceUID": true,
+                "serving.kserve.io/inferenceservice": true,
+                "source_type": false,
+                "stream": false
+              },
+              "includeByName": {},
+              "indexByName": {
+                "@timestamp": 1,
+                "_p": 2,
+                "app": 16,
+                "container_hash": 7,
+                "container_image": 8,
+                "container_name": 9,
+                "docker_id": 10,
+                "host": 11,
+                "kubernetes": 3,
+                "labels": 12,
+                "log": 4,
+                "namespace_name": 13,
+                "pod-template-hash": 17,
+                "pod_id": 14,
+                "pod_name": 15,
+                "source_type": 5,
+                "stream": 6,
+                "time": 0
+              },
+              "renameByName": {
+                "docker_id": "Docker ID",
+                "host": "Host",
+                "log": "Log",
+                "pod_id": "Pod ID",
+                "pod_name": "Pod Name",
+                "source_type": "Source Type",
+                "stream": "Stream",
+                "time": "Time"
+              }
+            }
+          }
+        ],
+        "type": "table"
+      }
+    }
+  },
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "11.0.0"
+    },
+    {
+      "type": "datasource",
+      "id": "yesoreyeram-infinity-datasource",
+      "name": "Infinity",
+      "version": "2.7.1"
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": true,
+      "keepTime": true,
+      "tags": [
+        "dashboards"
+      ],
+      "targetBlank": true,
+      "title": "Dashboard_Links",
+      "tooltip": "",
+      "type": "dashboards",
+      "url": ""
+    }
+  ],
+  "panels": [
+    {
+      "gridPos": {
+        "h": 16,
+        "w": 23,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "libraryPanel": {
+        "uid": "bdqix3gnahp8ga",
+        "name": "Global Search"
+      }
+    }
+  ],
+  "schemaVersion": 39,
+  "tags": [
+    "dashboards"
+  ],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "100",
+          "value": "100"
+        },
+        "hide": 0,
+        "label": "Line",
+        "name": "line",
+        "options": [
+          {
+            "selected": false,
+            "text": "",
+            "value": ""
+          }
+        ],
+        "query": "100",
+        "skipUrlSync": false,
+        "type": "textbox"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "worker",
+          "value": "worker"
+        },
+        "hide": 0,
+        "label": "Global Search",
+        "name": "gsearch",
+        "options": [
+          {
+            "selected": true,
+            "text": "worker",
+            "value": "worker"
+          }
+        ],
+        "query": "worker",
+        "skipUrlSync": false,
+        "type": "textbox"
+      }
+    ]
+  },
+  "time": {
+    "from": "now/fy",
+    "to": "now/fy"
+  },
+  "timeRangeUpdatedDuringEditOrView": false,
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "global-search",
+  "uid": "edqix9k3quccgc",
+  "version": 7,
+  "weekStart": ""
+}
