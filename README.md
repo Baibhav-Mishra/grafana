@@ -1,4 +1,4 @@
-# Grafana
+# Grafana Dashbord
 
 ## Setting up Infinity Plugin
 1) Install Infinity Plugin [here](https://grafana.com/grafana/plugins/yesoreyeram-infinity-datasource/)
@@ -14,5 +14,11 @@
 2) Import main.json, worker.json, docker-build-worker.json, global-search.json, model-search.json
 3) Select the configured Infinity Data Source
 
+## Using the Plugin
+1) The dashboard is divided into 4 panes worker, docker-build-worker, Model Search, Global Search
+2) The Line text field is used to specify the number of rows to be fetched
+3) The Model Id specifies the Model ID of the Model Search Pane
+4) The Global Search Text Field specifies the search field for the Global Search Pane
+![image](https://github.com/Baibhav-Mishra/grafana/assets/33419322/8d78e1ac-ef60-44c5-94c6-f72e4dbfc273)
 
 
